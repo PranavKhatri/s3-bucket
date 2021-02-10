@@ -1,7 +1,7 @@
 name: Deploy
 env:
   PACKAGE_S3_BUCKET_NAME : "telephone-to-s3"
-  DEPLOY_PACKAGE_NAME    : "gsuite-app-${{!!timestamp}}.zip"
+  DEPLOY_PACKAGE_NAME    : "gsuite-app-${{timestamp: "current"}}.zip"
   AWS_REGION_NAME        : "us-east-1"
 
 on:
