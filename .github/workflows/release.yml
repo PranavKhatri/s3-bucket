@@ -4,6 +4,8 @@ env:
   AWS_REGION_NAME        : "us-east-1"
   DEPLOY_PACKAGE_NAME    : "gsuite-app-$(date +%Y%m%d).zip"
 
+install: "pip install -r requirements.txt"
+
 on:
   push:
     branches:
