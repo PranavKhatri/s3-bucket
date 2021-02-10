@@ -1,20 +1,33 @@
-name: ReleaseCI
+name: Deploy
+env:
+  PACKAGE_S3_BUCKET_NAME : "telephone-to-s3"
+  DEPLOY_PACKAGE_NAME    : "gsuite-app-${{ github.sha }}.zip"
+  AWS_REGION_NAME        : "us-east-1"
 
 on:
   push:
     branches:
-    - master
+      - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - uses: jakejarvis/s3-sync-action@master
-      with:
-        args: --acl public-read --follow-symlinks --delete
-      env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        DEST_DIR: 'myfolder/${{ github.sha }}.zip/.'
+    integrate-to-s3:
+       runs-on: ubuntu-latest
+
+       steps:
+         - name: Git clone repository
+           uses: actions/checkout@v2
+
+    #pip install requirements.txt into the local directory
+
+         - name: Create ZIP deployment package
+           run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
+
+         - name: Configure AWS Credentials
+           uses: aws-actions/configure-aws-credentials@v1
+           with:
+             aws-access-key-id    : ${{ secrets.BOT_AWS_ACCESS_KEY }}
+             aws-secret-access-key: ${{ secrets.BOT_AWS_SECRET_KEY }}
+             aws-region           : ${{ env.AWS_REGION_NAME }}
+
+         - name: Copy our Deployment package to S3 bucket
+           run : aws s3 cp ${{ env.DEPLOY_PACKAGE_NAME }} s3://${{ env.PACKAGE_S3_BUCKET_NAME}}/
