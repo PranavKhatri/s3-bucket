@@ -2,7 +2,7 @@ name: Deploy
 env:
   PACKAGE_S3_BUCKET_NAME : "telephone-to-s3"
   timestamp              : "current"
-  DEPLOY_PACKAGE_NAME    : "gsuite-app-{{timestamp}}.zip"
+  DEPLOY_PACKAGE_NAME    : "gsuite-app-${{env.timestamp}}.zip"
   AWS_REGION_NAME        : "us-east-1"
 
 on:
@@ -21,7 +21,7 @@ jobs:
     #pip install requirements.txt into the local directory
 
          - name: Create ZIP deployment package
-           run : zip -r ${{ env.timestamp }} ./  -x  *.git*
+           run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
 
          - name: Configure AWS Credentials
            uses: aws-actions/configure-aws-credentials@v1
@@ -31,4 +31,4 @@ jobs:
              aws-region           : ${{ env.AWS_REGION_NAME }}
 
          - name: Copy our Deployment package to S3 bucket
-           run : aws s3 cp ${{ env.timestamp }} s3://${{ env.PACKAGE_S3_BUCKET_NAME}}/
+           run : aws s3 cp ${{ env.DEPLOY_PACKAGE_NAME }} s3://${{ env.PACKAGE_S3_BUCKET_NAME}}/
