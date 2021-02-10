@@ -4,6 +4,15 @@ env:
   AWS_REGION_NAME        : "us-east-1"
   DEPLOY_PACKAGE_NAME    : "gsuite-app-$(date +%Y%m%d).zip"
 
+language: python
+python:
+  -"3.6"
+  -"3.7"
+  -"3.8"
+  -"3.9"
+install:
+  -pip install -r requirements.txt
+
 on:
   push:
     branches:
@@ -16,9 +25,6 @@ jobs:
        steps:
          - name: Git clone repository
            uses: actions/checkout@v2
-
-         -install:
-           -pip install -r requirements.txt
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
