@@ -9,7 +9,7 @@ env:
 on:
   push:
     branches:
-      - master
+      - main
 ​
 jobs:
     integrate-to-s3:
