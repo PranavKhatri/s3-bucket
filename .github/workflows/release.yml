@@ -2,7 +2,7 @@ name: Deploy
 env:
   PACKAGE_S3_BUCKET_NAME : "telephone-to-s3"
   AWS_REGION_NAME        : "us-east-1"
-  DEPLOY_PACKAGE_NAME    : "gsuite-app-${{Sys.Date()}}.zip"
+  DEPLOY_PACKAGE_NAME    : "gsuite-app-$(Date:yyyyMMdd).zip"
 
 on:
   push:
