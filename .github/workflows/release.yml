@@ -17,11 +17,17 @@ jobs:
          - name: Git clone repository
            uses: actions/checkout@v2
 
-         - name: Install
-           run : pip3 install -r requirements.txt
+         - name: Install Environment
+           run : python -m pip install virtualenv
+
+         - name: Initialize Environment
+           run : python -m virtualenv venv
+
+         - name: Activate Environment
+           run : source venv/bin/activate
 
          - name: Install Package
-           run : pip freeze > requirements.txt
+           run : pip3 install -r requirements.txt
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
