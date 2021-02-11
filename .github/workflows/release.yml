@@ -27,7 +27,9 @@ jobs:
            run : source venv/bin/activate
 
          - name: Install Package
-           run : python3 -m pip install cryptography==2.9 
+           uses: py-actions/py-dependency-install@v2
+           with:
+             path: "requirements.txt"
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
