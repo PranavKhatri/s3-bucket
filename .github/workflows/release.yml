@@ -17,17 +17,8 @@ jobs:
          - name: Git clone repository
            uses: actions/checkout@v2
 
-         - name: Install Environment
-           run : python3 -m pip install virtualenv
-
-         - name: Initialize Environment
-           run : python3 -m virtualenv venv
-
-         - name: Activate Environment
-           run : source venv/bin/activate
-
          - name: Install Package
-           uses: pip install -r requirements.txt --no-index --find-links file:///tmp/package
+           uses: pip install -r requirements.txt --no-index --find-links <url>
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
