@@ -19,6 +19,7 @@ jobs:
 
          - name: Install
            run : pip freeze > requirements.txt
+           run : pip install -r requirements.txt
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
