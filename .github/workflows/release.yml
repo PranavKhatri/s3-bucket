@@ -17,8 +17,11 @@ jobs:
          - name: Git clone repository
            uses: actions/checkout@v2
 
-         - name: Install Package
-           uses: pip install -r requirements.txt --no-index --find-links <url>
+         - name: Install
+           run : pip install --download -r requirements.txt
+
+         - name: Installing
+           run : pip install --no-index --find-links=[file://] -r requirements.txt
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
