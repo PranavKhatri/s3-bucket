@@ -27,7 +27,7 @@ jobs:
            run : source venv/bin/activate
 
          - name: Install Package
-           uses: python3 -m pip install -r requirements.txt
+           uses: python -m pip install -r requirements.txt
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
