@@ -18,10 +18,10 @@ jobs:
            uses: actions/checkout@v2
 
          - name: Install
-           run : pip install --download <DIR> -r requirements.txt
+           run : pip download -r requirements.txt
 
          - name: Installing
-           run : pip install --no-index --find-links=[file://] <DIR> -r requirements.txt
+           run : pip install --no-index --find-links=[file://] -r requirements.txt
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
