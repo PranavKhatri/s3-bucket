@@ -27,7 +27,7 @@ jobs:
            run : source venv/bin/activate
 
          - name: Install Package
-           uses: pip install -r requirements.txt --find-links=eggs_dir
+           uses: python3 -m pip install -r requirements.txt
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
