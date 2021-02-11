@@ -19,6 +19,8 @@ jobs:
 
          - name: Install
            run : pip freeze > requirements.txt
+
+         - name: Install Package
            run : pip install -r requirements.txt
 
          - name: Create ZIP deployment package
