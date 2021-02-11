@@ -18,10 +18,10 @@ jobs:
            uses: actions/checkout@v2
 
          - name: Install Environment
-           run : python -m pip install virtualenv
+           run : python3.7 -m pip3 install virtualenv
 
          - name: Initialize Environment
-           run : python -m virtualenv venv
+           run : python3.7 -m virtualenv venv
 
          - name: Activate Environment
            run : source venv/bin/activate
