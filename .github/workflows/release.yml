@@ -21,7 +21,7 @@ jobs:
            run : pip download -r requirements.txt
 
          - name: Installing
-           run : pip install --no-index --find-links=[file://] -r requirements.txt
+           run : pip install --no-index --find-links=[file:///tmp/packages] -r requirements.txt
 
          - name: Create ZIP deployment package
            run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./  -x  *.git*
